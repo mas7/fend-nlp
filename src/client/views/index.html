@@ -8,44 +8,80 @@
     <link rel="stylesheet" href="/styles/header.css" />
     <link rel="stylesheet" href="/styles/form.css" />
     <link rel="stylesheet" href="/styles/footer.css" />
-    <script type="text/javascript" src="../../../dist/main.js"></script>
   </head>
 
   <body>
-    <header>
+    <!-- <header>
       <div class="">Logo</div>
       <div class="">navigation</div>
-    </header>
+    </header> -->
 
     <main>
       <section>
-        <form class="" onsubmit="return handleSubmit(event)">
+        <form onsubmit="return Client.handleSubmit(event)">
           <input
             id="name"
             type="text"
             name="input"
-            value=""
-            onblur="onBlur()"
-            placeholder="Name"
+            placeholder="Enter your sentence..."
+            required
           />
           <input
             type="submit"
-            name=""
-            value="submit"
-            onclick="return handleSubmit(event)"
+            value="Evaluate"
+            onclick="return Client.handleSubmit(event)"
             onsubmit="return handleSubmit(event)"
           />
         </form>
       </section>
 
-      <section>
-        <strong>Form Results:</strong>
-        <div id="results"></div>
+      <section class="results">
+        <strong class="title">Result</strong>
+        <!-- <div id="results"></div> -->
+        <table>
+          <tr>
+            <th>Key</th>
+            <th>Data</th>
+          </tr>
+          <tr>
+            <td>Model</td>
+            <td id="data-model"></td>
+          </tr>
+          <tr>
+            <td>Score Tag</td>
+            <td id="data-score-tag"></td>
+          </tr>
+          <tr>
+            <td>Agreement</td>
+            <td id="data-agreement"></td>
+          </tr>
+          <tr>
+            <td>Subjectivity</td>
+            <td id="data-subjectivity"></td>
+          </tr>
+          <tr>
+            <td>Confidence</td>
+            <td id="data-confidence"></td>
+          </tr>
+          <tr>
+            <td>Irony</td>
+            <td id="data-irony"></td>
+          </tr>
+        </table>
       </section>
     </main>
 
-    <footer>
+    <!-- <footer>
       <p>This is a footer</p>
-    </footer>
+    </footer> -->
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("service-worker.js");
+        });
+      }
+    </script>
   </body>
 </html>
