@@ -16,7 +16,6 @@ dotenv.config();
 
 app.use(express.static("dist"));
 
-console.log(__dirname);
 console.log(`Your API key is ${process.env.API_KEY}`);
 
 app.get("/", function (req, res) {
@@ -32,7 +31,7 @@ app.listen(8081, function () {
 app.post("/api", function (req, res) {
   const formdata = new FormData();
   formdata.append("key", process.env.API_KEY);
-  formdata.append("txt", req.body.text);
+  formdata.append("url", req.body.url);
   formdata.append("lang", "en"); // 2-letter code, like en es fr ...
 
   const requestOptions = {

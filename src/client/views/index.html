@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Test</title>
+    <title>Evaluate News NLP</title>
     <link rel="stylesheet" href="/styles/resets.css" />
     <link rel="stylesheet" href="/styles/base.css" />
     <link rel="stylesheet" href="/styles/header.css" />
@@ -11,38 +11,31 @@
   </head>
 
   <body>
-    <!-- <header>
-      <div class="">Logo</div>
-      <div class="">navigation</div>
-    </header> -->
-
     <main>
       <section>
         <form onsubmit="return Client.handleSubmit(event)">
           <input
-            id="name"
+            id="formURL"
             type="text"
-            name="input"
-            placeholder="Enter your sentence..."
+            onInput="inputChange(event)"
+            placeholder="http://"
             required
           />
           <input
             type="submit"
             value="Evaluate"
+            id="submitButton"
             onclick="return Client.handleSubmit(event)"
             onsubmit="return handleSubmit(event)"
           />
+          <p id="errorMessage"></p>
         </form>
       </section>
 
       <section class="results">
         <strong class="title">Result</strong>
-        <!-- <div id="results"></div> -->
+        <p id="resultsError"></p>
         <table>
-          <tr>
-            <th>Key</th>
-            <th>Data</th>
-          </tr>
           <tr>
             <td>Model</td>
             <td id="data-model"></td>
@@ -71,13 +64,21 @@
       </section>
     </main>
 
-    <!-- <footer>
-      <p>This is a footer</p>
-    </footer> -->
     <script>
-      // Check that service workers are supported
+      const submitButton = document.getElementById("submitButton");
+      const formURL = document.getElementById("formURL");
+
+      submitButton.disabled = true;
+
+      inputChange = (event) => {
+        if (event.target.value.length > 0) {
+          submitButton.disabled = false;
+        } else {
+          submitButton.disabled = true;
+        }
+      };
+
       if ("serviceWorker" in navigator) {
-        // Use the window load event to keep the page load performant
         window.addEventListener("load", () => {
           navigator.serviceWorker.register("service-worker.js");
         });
